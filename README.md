@@ -76,9 +76,7 @@ ssh-keygen -t ed25519
 ssh root@ip-адрес-вашего-сервера
 ```
 3. На вопрос `Are you sure you want to continue connecting (yes/no/[fingerprint])?` ответить `yes`
-![shell-fingerprint](/assets/shell/fingerprint.png)
 4. Ввести пароль, который вы получили при аренде VPS-сервера. Во время ввода пароля, он не будет отображаться (чтобы вставить в `powershell` используется правая кнопка мыши)
-![shell-password](/assets/shell/password.png)
+![shell-connection](/assets/shell/connection.png)
 
 Поздравляю, вы на сервер!
-![server-first-connection](/assets/server/first-connection.png)
