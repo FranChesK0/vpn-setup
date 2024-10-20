@@ -21,3 +21,13 @@ function msg_error() {
 
 # Check root
 [[ $EUID -ne 0 ]] && msg_error "Вы должны быть суперпользователем для запуска скрипта" && exit 1
+
+msg_info "Обновление системы..."
+# Update apt cache
+apt update &> /dev/null
+# Upgrade packages
+apt upgrade -y &> /dev/null
+
+msg_info "Установка зависимостей..."
+# Install necessary packages
+apt install -y sudo curl git ca-certificates iptables fail2ban ufw &> /dev/null
