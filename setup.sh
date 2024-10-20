@@ -112,3 +112,9 @@ apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker
 
 # Add user to 'docker' group
 usermod -aG docker $username
+
+read -rp "Установить 3x-ui? [Y/n]: " install_xui
+if [ -z $install_xui ]; then install_xui="y"; fi
+if [[ $install_xui == [yY] ]]; then
+    docker compose -f $PWD/3x-ui/compose.yaml up -d
+fi
