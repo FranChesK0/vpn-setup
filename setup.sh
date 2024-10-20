@@ -73,3 +73,23 @@ read -rp "Вставьте ваш публичный SSH ключ: " pubkey
 [[ -z $pubkey ]] && msg_error "Публичный ключ не был передан" && exit 1
 # Add user SSH public key
 echo $pubkey > $home_dir/.ssh/authorized_keys
+
+# Create copy of SSH config file
+cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+msg_info "Копия настроек SSH сохранена в файле '/etc/ssh/sshd_config.bak'"
+
+msg_info "Обновление конфигурации SSH..."
+# Disable root login
+sed -i -Ee 's/^#?(PermitRootLogin)[[:space:]]+.*/\1 no/g' /etc/ssh/sshd_config
+# Enable public key authentication
+sed -i -Ee 's/^#?(PubkeyAuthentication)[[:space:]]+.*/\1 yes/g' /etc/ssh/sshd_config
+# Disable password authentication
+sed -i -Ee 's/^#?(PasswordAuthentication)[[:space:]]+.*/\1 no/g' /etc/ssh/sshd_config
+
+msg_info "Перезапуск службы SSH..."
+# Restart SSH service
+systemctl restart sshd
+
+# Enable and start fail2ban
+systemctl enable --now fail2ban &> /dev/null
+systemctl start fail2ban &> /dev/null
