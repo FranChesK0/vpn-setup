@@ -127,3 +127,6 @@ ufw allow 443
 
 # Enable firewall
 ufw enable
+
+# Change user
+su $username
