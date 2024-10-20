@@ -54,3 +54,19 @@ useradd --create-home --shell "/bin/bash" --groups sudo -p "$(echo changeme | op
 # Force password change
 chage --lastday 0 $username
 msg_warn "Пользователь с имененм '$username' и временным паролем 'changeme' создан"
+
+msg_info "Создание SSH файлов..."
+home_dir=/home/$username
+# Create SSH directory
+mkdir -p $home_dir/.ssh
+# Create 'authorized_keys' file
+touch $home_dir/.ssh/authorized_keys
+# Adjust ownership and permissions
+chmod 0700 $home_dir/.ssh
+chomd 0600 $home_dir/.ssh/authorized_keys
+chown -R $username:$username $home_dir/.ssh
+
+read -rp "Вставьте ваш публичный SSH ключ: " pubkey
+[[ -z $pubkey ]] && msg_error "Публичный ключ не был передан" && exit 1
+# Add user SSH public key
+echo $pubkey > $home_dir/.ssh/authorized_keys
