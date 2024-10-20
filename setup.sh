@@ -63,7 +63,7 @@ mkdir -p $home_dir/.ssh
 touch $home_dir/.ssh/authorized_keys
 # Adjust ownership and permissions
 chmod 0700 $home_dir/.ssh
-chomd 0600 $home_dir/.ssh/authorized_keys
+chmod 0600 $home_dir/.ssh/authorized_keys
 chown -R $username:$username $home_dir/.ssh
 
 read -rp "Вставьте ваш публичный SSH ключ: " pubkey
