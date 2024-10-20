@@ -113,3 +113,15 @@ if [[ $install_xui == [yY] ]]; then
     # Run 3x-ui Docker container
     docker compose -f $PWD/3x-ui/compose.yaml up -d
 fi
+
+# Setup default firewall rules
+ufw default deny incoming
+ufw default allow outgoing
+
+# Allow SSH port and Web ports
+ufw allow 22/tcp
+ufw allow 80/tcp
+ufw allow 443
+
+# Enable firewall
+ufw enable
