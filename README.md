@@ -40,18 +40,18 @@
 1. Регистрируемся на сайте хостинг-провайдера
 2. Выбираем пункт `VPS` или `Виртуальный Сервер`
 3. Настраиваем VPS, так чтобы он соответствовал требованиям (красным выделены элементы, на которые стоит обратить внимание)
-![example-vps-configuration](/assets/example-vps-configuration.png)
+![vps-configuration](/assets/vps/configuration.png)
 4. Оплачиваем и ждем завершения создания VPS-сервера 
 5. В личном кабинете появится информация о сервере (имя пользователя, пароль и IP-адрес сервера). Она понадобится в следующих шагах
-![example-vps-info](/assets/example-vps-info.png)
+![vps-info](/assets/vps/info.png)
 
 # Создание домена
 Чтобы подключаться к вашему серверу по доменному имени, а не по IP-адресу, нужно настроить DNS с использованием сервиса [DuckDNS](duckdns.org). Это позволит использовать постоянное доменное имя, даже если IP-адрес сервера изменится.
 
 1. Заходим на сайт [DuckDNS](duckdns.org) и регистрируемся через любой удобный сервис (*Twitter*, *GitHub*, *Reddit*, *Google*)
 2. На вашей странице будет информация (account/почта, token). Она понадобится в следующих шагах
-![example-duckdns-info](/assets/example-duckdns-info.png)
+![duckdns-info](/assets/duckdns/info.png)
 3. Вводим в поле желаемое доменное имя и нажимаем `add domain` (теперь ваш домен будет выглядеть так: `ваш-домен.duckdns.org`)
-![example-duckdns-domain-create](/assets/example-duckdns-domain-create.png)
+![duckdns-domain-create](/assets/duckdns/domain-create.png)
 4. В поле `current ip` вводим IP-адрес сервера арендованного в прошлых шагах и нажимаем `update ip`
-![example-duckdns-update-ip](/assets/example-duckdns-update-ip.png)
+![duckdns-update-ip](/assets/duckdns/update-ip.png)
