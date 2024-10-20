@@ -99,3 +99,55 @@ apt update && apt install -y git && cd /opt && git clone https://github.com/Fran
 3. `Retype new password` - повторяем введенный пароль
 
 Теперь ваш сервер настроен и готов к настройке VPN.
+
+## 3x-UI
+Теперь перейдем к настройке VPN.
+
+### Вход в WEB-интерфейс VPN:
+1. Открыть терминал
+2. Ввести команду `ssh -L 2053:127.0.0.1:2053 имя-пользователя@ip-сервера`, заменив: имя пользователя, на то которое вы указали при настройке сервера; IP-адрес на ваш IP-адрес вашего VPS-сервера
+3. Ввести пароль от SSH-ключа, если вы создавали его с паролем
+![3x-ui-tun](/assets/3x-ui/tun.png)
+4. Открыть ссылку `http://localhost:2053` в вашем браузере
+5. Логин: `admin`, пароль: `admin`
+![3x-ui-login](/assets/3x-ui/login.png)
+
+### Настройка панели:
+1. Перейти в `Настройки панели`
+![3x-ui-pannel-settings](/assets/3x-ui/pannel-settings.png)
+2. Изменить часовой пояс на такой же, который вы указали при настройке сервера
+![3x-ui-timezone](/assets/3x-ui/timezone.png)
+3. Нажать `Сохранить`, а затем `Перезапустить панель`
+![3x-ui-save-reload](/assets/3x-ui/save-reload.png)
+4. Перейти в `Настройки безопасности` и изменить логин и пароль для панели
+![3x-ui-login-password](/assets/3x-ui/login-password.png)
+
+### Добавление подключение:
+1. Перейти в `Подключения`
+![3x-ui-inbounds](/assets/3x-ui/inbounds.png)
+2. Нажать `Добавить подключение`
+3. В `Примечание` написать название подключения
+4. В `Порт IP` написать IP-адрес сервера  
+![3x-ui-create-inbound-1](/assets/3x-ui/create-inbound-1.png)
+5. Скопировать число из поля `Порт` и ввести на сервере команду
+```bash
+sudo ufw allow скопированный-порт
+```
+![server-allow-port](/assets/server/allow-port.png)  
+6. Выключить `Клиент`    
+![3x-ui-create-inbound-2](/assets/3x-ui/create-inbound-2.png)   
+7. В `Безопасность` выбрать `REALITY`  
+8. В `Dest (Target)` указать `google.com:443`   
+9. В `SNI` указать `google.com,www.google.com`  
+10. Нажать кнопку `Get New Cert`   
+![3x-ui-create-inbound-3](/assets/3x-ui/create-inbound-3.png)  
+11. Нажать `Создать`
+
+Готов. Теперь подключение создано.
+
+### Добавление клиентов
+1. Нажать `Меню` -> `Добавить пользователя`
+![3x-ui-add-client-1](/assets/3x-ui/add-client-1.png)
+2. В поле `Email` указать имя клиента  
+![3x-ui-add-client-2](/assets/3x-ui/add-client-2.png)
+3. Нажать `Добавить пользователя`
