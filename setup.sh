@@ -46,3 +46,11 @@ if [ -z $timezone ]; then timezone="Europe/Moscow"; fi
 timedatectl set-timezone $timezone
 msg_info "Часовой пояс обновлен: "
 timedatectl
+
+read -rp "Введите имя пользователя: (По умолчанию: 'vpnuser'): " username
+if [ -z $username ]; then username="vpnuser"; fi
+# Add user and grant privileges
+useradd --create-home --shell "/bin/bash" --groups sudo -p "$(echo changeme | openssl passwd -1 -stdin)" $username
+# Force password change
+chage --lastday 0 $username
+msg_warn "Пользователь с имененм '$username' и временным паролем 'changeme' создан"
