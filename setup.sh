@@ -49,6 +49,9 @@ timedatectl
 
 read -rp "Введите имя пользователя: (По умолчанию: 'vpnuser'): " username
 if [ -z $username ]; then username="vpnuser"; fi
+# Check if user does not exist
+[[ -n $(egrep -i "^$username:" /etc/passwd) ]] && msg_error "Пользовтель $username уже существует" && exit 1
+
 # Add user and grant privileges
 useradd --create-home --shell "/bin/bash" --groups sudo -p "$(echo changeme | openssl passwd -1 -stdin)" $username
 # Force password change
