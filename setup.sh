@@ -32,14 +32,6 @@ msg_info "Установка зависимостей..."
 # Install necessary packages
 apt install -y sudo curl git ca-certificates iptables fail2ban ufw &> /dev/null
 
-read -rp "Введите ваш домен: " domain
-[[ -z $domain ]] && msg_error "Домен не был введен" && exit 1
-# Change hostname
-hostnamectl set-hostname $domain
-# Update '/etc/hosts' with new hostname
-sed -i -Ee "s/(127.0.0.1[[:space:]]+).*/\1$domain/g" /etc/hosts
-msg_info "Hostname изменен на $(cat /etc/hostname)"
-
 read -rp "Введите часовой пояс в формате Обалсть/Регион (По умолчанию: 'Europe/Moscow'): " timezone
 if [ -z $timezone ]; then timezone="Europe/Moscow"; fi
 # Update timezone
