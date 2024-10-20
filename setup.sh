@@ -100,7 +100,7 @@ echo \
 apt update &> /dev/null
 
 # Install Docker packages
-apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin &> /dev/null
 
 # Add user to 'docker' group
 usermod -aG docker $username
@@ -110,10 +110,12 @@ if [ -z $install_xui ]; then install_xui="y"; fi
 if [[ $install_xui == [yY] ]]; then
     # Update hostname
     sed -i -Ee "s/(.*)SERVER-HOSTNAME(.*)/\1$(cat /etc/hostname)\2/g" $PWD/3x-ui/compose.yaml
+    msg_info "Установка 3x-ui..."
     # Run 3x-ui Docker container
-    docker compose -f $PWD/3x-ui/compose.yaml up -d
+    docker compose -f $PWD/3x-ui/compose.yaml up -d &> /dev/null
 fi
 
+msg_info "Обновление правил UFW..."
 # Setup default firewall rules
 ufw default deny incoming
 ufw default allow outgoing
