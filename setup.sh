@@ -116,6 +116,8 @@ usermod -aG docker $username
 read -rp "Установить 3x-ui? [Y/n]: " install_xui
 if [ -z $install_xui ]; then install_xui="y"; fi
 if [[ $install_xui == [yY] ]]; then
+    # Update hostname
+    sed -i -Ee "s/(.*)SERVER-HOSTNAME(.*)/\1$(cat /etc/hostname)\2/g" $PWD/3x-ui/compose.yaml
     # Run 3x-ui Docker container
     docker compose -f $PWD/3x-ui/compose.yaml up -d
 fi
