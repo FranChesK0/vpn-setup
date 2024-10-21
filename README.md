@@ -41,17 +41,17 @@
 1. Регистрируемся на сайте хостинг-провайдера
 2. Выбираем пункт `VPS` или `Виртуальный Сервер`
 3. Настраиваем VPS, так чтобы он соответствовал требованиям (красным выделены элементы, на которые стоит обратить внимание)
-![vps-configuration](/assets/vps/configuration.png)
+![vps-configuration](./assets/vps/configuration.png)
 4. Оплачиваем и ждем завершения создания VPS-сервера 
 5. В личном кабинете появится информация о сервере (имя пользователя, пароль и IP-адрес сервера). Она понадобится в следующих шагах
-![vps-info](/assets/vps/info.png)
+![vps-info](./assets/vps/info.png)
 
 ## Создание SSH-ключа
 Использование SSH-ключей вместо пароля для подключения к серверу - это один из лучших способов повысить безопасность сервера. SSH-ключ состоит из пары: **публичного ключа** и **приватного ключа**. Публичный ключ добавляется на сервер, а приватный остается только у вас на компьютере.
 
 1. Открываем терминал:
     - **Windows**: Нажать сочетание клавиш `Win+R`, в появившемся окне написать `powershell` и нажать `enter`
-    ![shell-open](/assets/shell/open.png)
+    ![shell-open](./assets/shell/open.png)
     - **macOS**: В поиске написать `терминал` и нажать `enter`
     - **Linux**: Эта инструкция явно не для вас...
 2. В открывшемся терминале ввести команду:
@@ -60,10 +60,10 @@ ssh-keygen -t ed25519
 ```
 3. Вам предложат ввести место хранения SSH-ключа. Нажимаем `enter` чтобы согласиться со стандартным местом хранения (его нужно запомнить)
 4. Далее для дополнительной защиты можно ввести пароль. Пароль не обязателен, но он добавляет уровень безопасности. Чтобы пропустить ввод пароля, нужно нажать `enter` ничего не вводя
-![shell-keygen](/assets/shell/keygen.png)
+![shell-keygen](./assets/shell/keygen.png)
 
 Теперь вы можете найти свой публичный SSH-ключ по пути, который выдал вам скрипт. Посмотреть и скопировать его можно открыв через блокнот (**важно копировать файл с расширением `.pub`**):
-![shell-ssh-key](/assets/shell/ssh-key.png)
+![shell-ssh-key](./assets/shell/ssh-key.png)
 
 # Настройка VPN-сервера
 После того как вы арендовали VPS-сервер, можно переходить к основному процессу настройки сервера и VPN.
@@ -77,7 +77,7 @@ ssh root@ip-адрес-вашего-сервера
 ```
 3. На вопрос `Are you sure you want to continue connecting (yes/no/[fingerprint])?` ответить `yes`
 4. Ввести пароль, который вы получили при аренде VPS-сервера. Во время ввода пароля, он не будет отображаться (чтобы вставить в `powershell` используется правая кнопка мыши)
-![shell-connection](/assets/shell/connection.png)
+![shell-connection](./assets/shell/connection.png)
 
 Поздравляю, вы на сервер!
 
@@ -91,7 +91,7 @@ apt update && apt install -y git && cd /opt && git clone https://github.com/Fran
 2. `Введите имя пользователя (По умолчанию: 'vpnuser')` - нужно ввести имя пользователя, под которым вы будете подключаться к серверу в дальнейшем. Если оставить поле пустым имя пользователя станет `vpnuser`
 3. `Вставьте ваш публичный SSH-ключ` - нужно скопировать и вставить (в `powershell` вставлять при помощи правой кнопки мыши) публичный ключ, который был создан в предыдущих шагах. Если вставить неверный SSH-ключ доступ к серверу может быть потерян, в этом случае поможет переустановка системы (это можно сделать почти у всех хостинг-провайдеров на сайте) или замена сервера
 4. `Установить 3x-ui? [Y/n]` - ввести `y`
-![server-script](/assets/server/script.png)
+![server-script](./assets/server/script.png)
 
 После завершения скрипта вы будете авторизированы под созданным пользователем. Вам сразу же предложат сменить пароль (**все введенные пароли не будут отображаться**):
 1. `Current password` - вводим `changeme`
@@ -107,49 +107,49 @@ apt update && apt install -y git && cd /opt && git clone https://github.com/Fran
 1. Открыть терминал
 2. Ввести команду `ssh -L 2053:127.0.0.1:2053 имя-пользователя@ip-сервера`, заменив: имя пользователя, на то которое вы указали при настройке сервера; IP-адрес на ваш IP-адрес вашего VPS-сервера
 3. Ввести пароль от SSH-ключа, если вы создавали его с паролем
-![3x-ui-tun](/assets/3x-ui/tun.png)
+![3x-ui-tun](./assets/3x-ui/tun.png)
 4. Открыть ссылку `http://localhost:2053` в вашем браузере
 5. Логин: `admin`, пароль: `admin`
-![3x-ui-login](/assets/3x-ui/login.png)
+![3x-ui-login](./assets/3x-ui/login.png)
 
 ### Настройка панели:
 1. Перейти в `Настройки панели`
-![3x-ui-pannel-settings](/assets/3x-ui/pannel-settings.png)
+![3x-ui-pannel-settings](./assets/3x-ui/pannel-settings.png)
 2. Изменить часовой пояс на такой же, который вы указали при настройке сервера
-![3x-ui-timezone](/assets/3x-ui/timezone.png)
+![3x-ui-timezone](./assets/3x-ui/timezone.png)
 3. Нажать `Сохранить`, а затем `Перезапустить панель`
-![3x-ui-save-reload](/assets/3x-ui/save-reload.png)
+![3x-ui-save-reload](./assets/3x-ui/save-reload.png)
 4. Перейти в `Настройки безопасности` и изменить логин и пароль для панели
-![3x-ui-login-password](/assets/3x-ui/login-password.png)
+![3x-ui-login-password](./assets/3x-ui/login-password.png)
 
 ### Добавление подключение:
 1. Перейти в `Подключения`
-![3x-ui-inbounds](/assets/3x-ui/inbounds.png)
+![3x-ui-inbounds](./assets/3x-ui/inbounds.png)
 2. Нажать `Добавить подключение`
 3. В `Примечание` написать название подключения
 4. В `Порт IP` написать IP-адрес сервера  
-![3x-ui-create-inbound-1](/assets/3x-ui/create-inbound-1.png)
+![3x-ui-create-inbound-1](./assets/3x-ui/create-inbound-1.png)
 5. Скопировать число из поля `Порт` и ввести на сервере команду
 ```bash
 sudo ufw allow скопированный-порт
 ```
-![server-allow-port](/assets/server/allow-port.png)  
+![server-allow-port](./assets/server/allow-port.png)  
 6. Выключить `Клиент`    
-![3x-ui-create-inbound-2](/assets/3x-ui/create-inbound-2.png)   
+![3x-ui-create-inbound-2](./assets/3x-ui/create-inbound-2.png)   
 7. В `Безопасность` выбрать `REALITY`  
 8. В `Dest (Target)` указать `google.com:443`   
 9. В `SNI` указать `google.com,www.google.com`  
 10. Нажать кнопку `Get New Cert`   
-![3x-ui-create-inbound-3](/assets/3x-ui/create-inbound-3.png)  
+![3x-ui-create-inbound-3](./assets/3x-ui/create-inbound-3.png)  
 11. Нажать `Создать`
 
 Готов. Теперь подключение создано.
 
 ### Добавление клиентов
 1. Нажать `Меню` -> `Добавить пользователя`
-![3x-ui-add-client-1](/assets/3x-ui/add-client-1.png)
+![3x-ui-add-client-1](./assets/3x-ui/add-client-1.png)
 2. В поле `Email` указать имя клиента  
-![3x-ui-add-client-2](/assets/3x-ui/add-client-2.png)
+![3x-ui-add-client-2](./assets/3x-ui/add-client-2.png)
 3. Нажать `Добавить пользователя`
 
 # Настройка клиентов
@@ -157,7 +157,7 @@ sudo ufw allow скопированный-порт
 
 ## Получение ссылки для подключения
 1. Нажать на `+` у подключения, чтобы развернуть список клиентов
-![3x-ui-client-1](/assets/3x-ui/client-1.png)
+![3x-ui-client-1](./assets/3x-ui/client-1.png)
 2. Нажать на иконку QR-кода
 3. Если нажать на QR-код, то ссылка будет скопирована в буфер обмена
-![3x-ui-client-2](/assets/3x-ui/client-2.png)
+![3x-ui-client-2](./assets/3x-ui/client-2.png)
