@@ -117,16 +117,17 @@ fi
 
 msg_info "Обновление правил UFW..."
 # Setup default firewall rules
-ufw default deny incoming
-ufw default allow outgoing
+ufw default deny incoming &> /dev/null
+ufw default allow outgoing &> /dev/null
 
 # Allow SSH port and Web ports
-ufw allow 22/tcp
-ufw allow 80/tcp
-ufw allow 443
+ufw allow 22/tcp &> /dev/null
+ufw allow 80/tcp &> /dev/null
+ufw allow 443 &> /dev/null
 
 # Enable firewall
-ufw enable
+ufw --force enable &> /dev/null
+msg_info "Firewall активирован"
 
 # Change user
 su $username
