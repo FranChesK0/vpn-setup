@@ -21,7 +21,7 @@ jobs:
           mv README.md _pages/index.md
 
           mkdir -p _pages/assets
-          cp -R assets _pages/assets
+          mv assets _pages/assets
 
           rm -rf !'_pages'
 
