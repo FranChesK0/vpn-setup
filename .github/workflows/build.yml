@@ -21,8 +21,9 @@ jobs:
           mv README.md _pages/index.md
 
           mkdir -p _pages/assets
+          cp -R assets _pages/assets
 
-          rm -rf !( "_pages" )
+          rm -rf !'_pages'
 
       - name: Create Hyde config
         run: |
