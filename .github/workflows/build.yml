@@ -18,9 +18,11 @@ jobs:
       - name: Create site from Readme
         run: |
           mkdir _pages
-          mv assets _pages/assets
           mv README.md _pages/index.md
-          rm -rf !'_pages'
+
+          mkdir -p _pages/assets
+
+          rm -rf !( "_pages" )
 
       - name: Create Hyde config
         run: |
